@@ -3,21 +3,22 @@ import time
 from scoreboard import Scoarboard
 from food import Food
 from snake import Snake
+DIFFICULTY_LEVELS = {
+    1:  0.4,
+    2:  0.2,
+    3:  0.08,
+    4:  0.06,
+    5:  0.04
+}
 
 score = Scoarboard()
 
 
-def difficulty(level):
-    if level == 1:
-        return time.sleep(0.4)
-    if level == 2:
-        return time.sleep(0.2)
-    if level == 3:
-        return time.sleep(0.08)
-    if level == 4:
-        return time.sleep(0.06)
-    if level == 5:
-        return time.sleep(0.04)
+def set_difficulty(chosen_level):
+    for level in DIFFICULTY_LEVELS:
+        if level == chosen_level:
+            return time.sleep(DIFFICULTY_LEVELS[level])
+
 
 
 def game():
@@ -34,7 +35,7 @@ def game():
     game_is_on = True
     while game_is_on:
         screen.update()
-        difficulty(level)
+        set_difficulty(level)
         snake.move()
 
         if snake.head.distance(food) < 15:
